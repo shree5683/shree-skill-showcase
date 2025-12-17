@@ -22,21 +22,12 @@ const Navbar = () => {
   }, []);
 
   const handleDownloadResume = () => {
-    const resumeContent = `SHREEHARSH SHINDE - Computer Engineer
-Contact: +91 9850941105 | shreeharshshinde006@gmail.com
-Skills: JavaScript, React.js, Node.js, Java, SQL, MongoDB
-Experience: Jr. Software Developer at Creazione Software, Web Dev Intern at Tech-Place Solution
-Education: B.E in Computer Engineering, CGPA: 8.5`;
-
-    const blob = new Blob([resumeContent], { type: "text/plain" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "Shreeharsh_Shinde_Resume.txt";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    const link = document.createElement("a");
+    link.href = "/Shreeharsh_Resume.pdf";
+    link.download = "Shreeharsh_Shinde_Resume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
