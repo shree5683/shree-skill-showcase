@@ -3,64 +3,12 @@ import { Download, Mail, Linkedin, Github, ChevronDown } from "lucide-react";
 
 const HeroSection = () => {
   const handleDownloadResume = () => {
-    // Create resume content
-    const resumeContent = `SHREEHARSH SHINDE
-Computer Engineer
-
-Contact: +91 9850941105
-Email: shreeharshshinde006@gmail.com
-LinkedIn: linkedin.com/in/shreeharsh-shinde
-GitHub: github.com/shreeharsh-shinde
-
-PROFESSIONAL SUMMARY
-Passionate Developer with internship and hands-on experience in React.js, Node.js, JavaScript, and Java. Skilled at building responsive, mobile-first web apps and eager to deliver robust solutions in dynamic environments.
-
-SKILLS
-Languages: JavaScript (ES6+), Core Java, SQL, Object Oriented Programming
-Frontend: HTML5, CSS3, React.Js
-Backend: Node.Js, Express.Js, REST APIs, MongoDB
-Tools & Platforms: Git, GitHub, VS Code, Eclipse IDE, Jira, MySQL
-Others: Problem Solving, Responsive Design, Agile Workflow, Deployment, SDLC
-
-EXPERIENCE
-Jr. Software Developer | Creazione Software | July 2025 – Present
-• Completed 2 months of professional training on web development fundamentals
-• Designed and enhanced a dashboard page for a gaming website using React, JavaScript, and CSS
-• Focused on responsive design and collaborated with team members to Enhanced UI consistency across devices
-
-Web Development Intern | Tech-Place Solution | January 2023 - March 2023
-• Designed and implemented 5+ responsive UI modules using HTML, CSS, Bootstrap, and media queries
-• Integrated backend logic using Node.js and MySQL, improving data flow efficiency by 40%
-• Collaborated in a 4-member team to deliver two full client modules, reducing delivery timeline by 25%
-• Used Git and Jira for code collaboration, version control, and sprint planning
-
-PROJECTS
-Student Record Management System
-Tech Stack: Core Java, SQL, MySQL
-• Built a CRUD-based console application to manage student data for academic purposes
-• Achieved 98% data accuracy using JDBC and robust validation with exception handling
-• Connected to MySQL for persistent data storage, handling 500+ test records without data loss
-
-Movie Recommendation System | moviegyan.in
-Tech Stack: React.js, JavaScript, HTML, CSS
-• Created a responsive movie recommendation web app with dynamic search and filter features
-• Optimized UI for mobile and desktop, achieving 95% positive user feedback
-• Deployed as a live project with real-time features, Improving performance and user experience
-
-EDUCATION
-Savitribai Phule Pune University
-B.E in Computer Engineering | January 2021 – June 2024
-Final Year CGPA: 8.5`;
-
-    const blob = new Blob([resumeContent], { type: "text/plain" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "Shreeharsh_Shinde_Resume.txt";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    const link = document.createElement("a");
+    link.href = "/Shreeharsh_Resume.pdf";
+    link.download = "Shreeharsh_Shinde_Resume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const scrollToContact = () => {
