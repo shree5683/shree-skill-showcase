@@ -1,5 +1,6 @@
 import { ExternalLink, Github, Database, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const projects = [
   {
@@ -13,6 +14,7 @@ const projects = [
     ],
     icon: Globe,
     link: "https://moviegyan.in",
+    github: "https://github.com/shreeharsh-shinde",
     featured: true,
   },
   {
@@ -25,17 +27,20 @@ const projects = [
       "Handled 500+ test records without data loss",
     ],
     icon: Database,
+    github: "https://github.com/shreeharsh-shinde",
     featured: false,
   },
 ];
 
 const ProjectsSection = () => {
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
+
   return (
     <section id="projects" className="py-24 relative">
       <div className="absolute right-1/4 top-1/3 w-80 h-80 bg-primary/10 rounded-full blur-[120px]" />
       
-      <div className="container px-6 relative z-10">
-        <div className="text-center mb-16">
+      <div className="container px-6 relative z-10" ref={ref}>
+        <div className={`text-center mb-16 animate-on-scroll ${isVisible ? "visible" : ""}`}>
           <h2 className="text-sm font-mono text-primary mb-4 tracking-wider uppercase">
             What I've Built
           </h2>
@@ -48,10 +53,10 @@ const ProjectsSection = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <div
               key={project.title}
-              className={`group relative overflow-hidden rounded-2xl border border-border bg-card/50 backdrop-blur-sm hover:border-primary/50 transition-all duration-500 ${
+              className={`group relative overflow-hidden rounded-2xl border border-border bg-card/50 backdrop-blur-sm hover-glow hover-lift animate-on-scroll stagger-${index + 1} ${isVisible ? "visible" : ""} ${
                 project.featured ? "lg:col-span-2" : ""
               }`}
             >
@@ -61,7 +66,7 @@ const ProjectsSection = () => {
               <div className="relative p-8">
                 <div className="flex items-start justify-between mb-6">
                   <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
+                    <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
                       <project.icon className="w-7 h-7 text-primary" />
                     </div>
                     <div>
@@ -70,23 +75,37 @@ const ProjectsSection = () => {
                     </div>
                   </div>
                   
-                  {project.link && (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2 rounded-lg border border-border hover:border-primary hover:text-primary transition-all duration-300"
-                    >
-                      <ExternalLink className="w-5 h-5" />
-                    </a>
-                  )}
+                  <div className="flex gap-2">
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 rounded-lg border border-border hover:border-primary hover:text-primary hover:scale-110 transition-all duration-300"
+                        aria-label="View on GitHub"
+                      >
+                        <Github className="w-5 h-5" />
+                      </a>
+                    )}
+                    {project.link && (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 rounded-lg border border-border hover:border-primary hover:text-primary hover:scale-110 transition-all duration-300"
+                        aria-label="View live site"
+                      >
+                        <ExternalLink className="w-5 h-5" />
+                      </a>
+                    )}
+                  </div>
                 </div>
 
                 <div className="flex flex-wrap gap-2 mb-6">
                   {project.techStack.map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1 text-xs font-mono rounded-full bg-primary/10 text-primary"
+                      className="px-3 py-1 text-xs font-mono rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors duration-300"
                     >
                       {tech}
                     </span>
@@ -104,9 +123,9 @@ const ProjectsSection = () => {
 
                 {project.link && (
                   <div className="mt-8">
-                    <Button variant="outline" size="sm" asChild>
+                    <Button variant="outline" size="sm" asChild className="group/btn">
                       <a href={project.link} target="_blank" rel="noopener noreferrer">
-                        <Globe className="w-4 h-4" />
+                        <Globe className="w-4 h-4 group-hover/btn:rotate-12 transition-transform duration-300" />
                         Visit Live Site
                       </a>
                     </Button>

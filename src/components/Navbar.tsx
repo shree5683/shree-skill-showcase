@@ -62,12 +62,12 @@ Education: B.E in Computer Engineering, CGPA: 8.5`;
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300"
+                className="relative text-sm text-muted-foreground hover:text-primary transition-colors duration-300 after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-[-4px] after:left-0 after:bg-primary after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
               >
                 {link.name}
               </a>
             ))}
-            <Button variant="outline" size="sm" onClick={handleDownloadResume}>
+            <Button variant="outline" size="sm" onClick={handleDownloadResume} className="hover:scale-105 transition-transform duration-300">
               <Download className="w-4 h-4" />
               Resume
             </Button>

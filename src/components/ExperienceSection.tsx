@@ -1,4 +1,5 @@
 import { Briefcase, Calendar } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const experiences = [
   {
@@ -27,12 +28,14 @@ const experiences = [
 ];
 
 const ExperienceSection = () => {
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
+
   return (
     <section id="experience" className="py-24 relative">
       <div className="absolute left-1/4 top-1/2 w-72 h-72 bg-primary/10 rounded-full blur-[100px]" />
       
-      <div className="container px-6 relative z-10">
-        <div className="text-center mb-16">
+      <div className="container px-6 relative z-10" ref={ref}>
+        <div className={`text-center mb-16 animate-on-scroll ${isVisible ? "visible" : ""}`}>
           <h2 className="text-sm font-mono text-primary mb-4 tracking-wider uppercase">
             Where I've Worked
           </h2>
@@ -49,7 +52,7 @@ const ExperienceSection = () => {
             {experiences.map((exp, index) => (
               <div
                 key={exp.title}
-                className={`relative mb-12 md:mb-16 ${
+                className={`relative mb-12 md:mb-16 animate-on-scroll stagger-${index + 1} ${isVisible ? "visible" : ""} ${
                   index % 2 === 0 ? "md:pr-1/2 md:text-right" : "md:pl-1/2 md:ml-auto"
                 }`}
               >
@@ -69,7 +72,7 @@ const ExperienceSection = () => {
                     index % 2 === 0 ? "md:mr-12" : "md:ml-12"
                   }`}
                 >
-                  <div className="p-6 rounded-xl border border-border bg-card/50 backdrop-blur-sm hover:border-primary/50 transition-all duration-300 group">
+                  <div className="p-6 rounded-xl border border-border bg-card/50 backdrop-blur-sm hover-glow hover-lift group">
                     <div className={`flex items-center gap-2 mb-2 ${index % 2 === 0 ? "md:justify-end" : ""}`}>
                       <Briefcase className="w-4 h-4 text-primary" />
                       <span className="text-sm font-mono text-primary">{exp.company}</span>
